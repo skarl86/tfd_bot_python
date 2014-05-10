@@ -15,6 +15,7 @@ class NaverSearch(object):
         self._API_KEY = "a0504c8ef72934d16be6d2a29e5b69aa"
         self._BASE_URL = "http://openapi.naver.com/search"
         self._Target = "local"
+        
     def getResult(self, keyword, display = "100", start = "1", sort = "random"):
         query = keyword.replace(" ", "+")
         url = self._BASE_URL + "?"
@@ -38,6 +39,7 @@ class NaverSearch(object):
     
     def _generateData(self, data):
         list = []
+        #All item is added to items list
         items = data.findAll("item")
         for item in items:
             title = item.find("title")
@@ -51,7 +53,9 @@ class NaverSearch(object):
     
     def _connect(self, url):
         try:
+            #HTML parsing
             data = urllib2.urlopen(url).read()
+            #Import to BeautifulSoup
             soup = BeautifulSoup(data)
             return self._generateData(soup)
         except urllib2.HTTPError, e:
