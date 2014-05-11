@@ -28,7 +28,9 @@ class GeoTrans(object):
     def __init__(self):
         self.keys = {"GEO":"GEO", "KATEC":"KATEC", "TM":"TM"}
         self.m_arScaleFactor = {"GEO":1.0, "KATEC":0.9999, "TM":1.0}
+#         self.m_arScaleFactor = {"GEO":1.0, "KATEC":0.9996, "TM":1.0}
         self.m_arLonCenter = {"GEO":0.0, "KATEC":2.23402144255274, "TM":2.21656815003280}
+#         self.m_arLonCenter = {"GEO":0.0, "KATEC":2.22529479629277, "TM":2.21661859489671}
         self.m_arLatCenter = {"GEO":0.0, "KATEC":0.663225115757845, "TM":0.663225115757845}
         self.m_arFalseNorthing = {"GEO":0.0, "KATEC":600000.0, "TM":500000.0}
         self.m_arFalseEasting = {"GEO":0.0, "KATEC":400000.0, "TM":200000.0}

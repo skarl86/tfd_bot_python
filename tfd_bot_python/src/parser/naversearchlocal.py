@@ -28,13 +28,19 @@ class NaverSearch(object):
                  }
         completeParam = self._generateParam(param)
         url = url + completeParam
-        print url
-        return self._connect(url)
+        
+        #HTML Parsing
+        data = self._connect(url)
+        #Import to BeautifulSoup
+        soup = BeautifulSoup(data)
+        #Item Parsing
+        itemList = self._generateData(soup)
+        return itemList
         
     def _generateParam(self, param):
         list = []
         for k in param.keys():
-            list.append("=".join([k, param[k]]))
+            list.append("=".join([k, str(param[k])]))
         return "&".join(list)
     
     def _generateData(self, data):
@@ -54,10 +60,7 @@ class NaverSearch(object):
     def _connect(self, url):
         try:
             #HTML parsing
-            data = urllib2.urlopen(url).read()
-            #Import to BeautifulSoup
-            soup = BeautifulSoup(data)
-            return self._generateData(soup)
+            return urllib2.urlopen(url).read()
         except urllib2.HTTPError, e:
             print "HTTP error: %s" % e.code
         except urllib2.URLError, e:
