@@ -54,7 +54,7 @@ class NaverSearch(object):
             desc = item.find("description")
             mapx = item.find("mpax")
             mapy = item.find("mapy")
-            list.append(NaverLocalDTO(title, tel, addr, desc, mapx, mapy))
+            list.append({"title":title, "telephone":tel, "address":addr, "description":desc, "mapx":mapx, "mapy":mapy})
         return list
     
     def _connect(self, url):
@@ -66,15 +66,6 @@ class NaverSearch(object):
         except urllib2.URLError, e:
             print "Network error: %s" % e.reason.args[1]
             
-            
-class NaverLocalDTO(object):
-    def __init__(self, title, telephone, address, description, mapx, mapy):
-        self._Title = title
-        self._Telephone = telephone
-        self._Address = address
-        self._Description = description
-        self._Mapx = mapx
-        self._Mapy = mapy
         
 #================ Test Code ================================================
 def unescape(matched):
@@ -85,4 +76,5 @@ if __name__ == "__main__":
     nm = NaverSearch()
     list = nm.getResult("홍대 식당")
     for l in list:
-        print re.sub('&([a-z]+);', unescape, l._Title.string)
+        print l["title"]
+#         print re.sub('&([a-z]+);', unescape, l["title"])
