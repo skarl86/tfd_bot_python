@@ -1,11 +1,19 @@
+# -*- coding: UTF-8 -*-
 '''
 Created on 2014. 5. 13.
 
 @author: taeyong
 '''
 
+"""
+jpype 설치법(OS X 기준)
+1. http://jpype.sourceforge.net에서 jpype최신 버전을 받는다.
+2. 적당한 곳에 압축을 푼다.
+3. 터미널에서 압축푼 곳의 경로에 맞춘다.
+4. sudo -E python setup.py install 을 입력한다.
+"""
+
 import jpype
-import os.path
 
 def katechToWgs84(x, y):
     if(type(x) != type(0.0) or type(y) != type(0.0)):
@@ -56,7 +64,8 @@ def Wgs84ToKatech(x, y):
 #================= Test Code ===================================
 if __name__ == "__main__":
     dict = {}
-    dict = katechToWgs84(276921.0, 434016.0)    
+#     dict = katechToWgs84(304888.0, 551340.0)    
+    dict = katechToWgs84(306062.0, 550992.0)
     print str(dict["x"]) + " " + str(dict["y"])
     
     dict = Wgs84ToKatech(dict["x"], dict["y"])
