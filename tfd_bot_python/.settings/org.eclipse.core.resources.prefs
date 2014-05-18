@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/controller/controller.py=utf-8
 encoding//src/parser/googleplace.py=utf-8
+encoding//src/parser/naversearch.py=utf-8
