@@ -135,6 +135,8 @@ class NaverBlog(NaverSearch):
                 b_link = item.find("bloggerlink")
                 
                 text = self._blogParsing(link.text) #위에서 얻은 link를 통해 블로그의 내용을 파싱
+                if len(text) == 0:
+                    continue
                 dic = {"title":title.encode('utf-8'),
                        "text":text.encode('utf-8'),
                        "link":link.text.encode('utf-8'),
@@ -143,6 +145,7 @@ class NaverBlog(NaverSearch):
                        "bloggerlink":b_link.text.encode('utf-8')
                        }
                 list.append(dic)
+#                 print "Processing at " + str(len(list))
         return list
     
     def _blogParsing(self, link):
@@ -168,3 +171,16 @@ class NaverBlog(NaverSearch):
         text = bs.find("div", {"id":postNo}).text
         
         return text
+    
+# if __name__ == "__main__":
+#     list = []
+#     a = NaverBlog()
+#     list = a.getResult("홍대 술집")
+#     for dict in list:
+#         print dict["title"]
+#         print dict["link"]
+#         print dict["description"]
+#         print dict["bloggername"]
+#         print dict["bloggerlink"]
+#         print dict["text"]
+#         print "="*50
