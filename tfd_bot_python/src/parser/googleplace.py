@@ -39,7 +39,7 @@ class GooglePlace(object):
         completParam = self._generateParam(param)
         url = "?".join([url, completParam])
         print url
-        self._connect(url)
+        return self._connect(url)
         
     def getDetailResult(self):
         function = "details"
@@ -54,7 +54,7 @@ class GooglePlace(object):
             #JSON 값을 Dictionary로 Converse.
             data = json.loads(data)            
             # DB에 넣기 전 데이터 가공단계.
-            self._generateData(data)
+            return self._generateData(data)
             
         except urllib2.HTTPError, e:
             print "HTTP error: %d" % e.code
@@ -66,10 +66,29 @@ class GooglePlace(object):
         for k in param.keys():
             list.append("=".join([k,param[k]]))
         return "&".join(list)
+    
     def _generateData(self, data):
+        returnList = []
         resultList = data["results"]
-        newData = {}
-        
+        for dict in resultList:
+            lat, lng = self._seperateLocation(dict["geometry"])
+            newData = {"name":dict["name"],
+                       "address":dict["formatted_address"],
+                       "category":",".join(dict["types"]),
+                       "pointx":lng,
+                       "pointy":lat
+                       }
+            returnList.append(newData)
+        return returnList
+                    
+    def _seperateLocation(self, location):
+        try:
+            lat = location["location"]["lat"]
+            lng = location["location"]["lng"]
+        except KeyError:
+            print "Dictionary Key error."
+            return None, None
+        return lat, lng
     
 if __name__ == "__main__":
     gp = GooglePlace()

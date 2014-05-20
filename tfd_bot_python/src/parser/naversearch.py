@@ -98,14 +98,14 @@ class NaverLocal(NaverSearch):
                 mapx = item.find("mapx")
                 mapy = item.find("mapy")
                 
-                dic = {"title":title.encode('utf-8'),
+                dic = {"name":title.encode('utf-8'),
                        "category":category.text.encode('utf-8'),
                        "telephone":tel.text.encode('utf-8'),
                        "address":addr.text.encode('utf-8'),
-                       "link":link.text.encode('utf-8'),
+                       "url":link.text.encode('utf-8'),
                        "description":desc.encode('utf-8'),
-                       "mapx":mapx.text.encode('utf-8'),
-                       "mapy":mapy.text.encode('utf-8')
+                       "pointx":mapx.text.encode('utf-8'),
+                       "pointy":mapy.text.encode('utf-8')
                        }
                 list.append(dic)
         return list
